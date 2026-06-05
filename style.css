@@ -1,0 +1,818 @@
+/* ==========================================================================
+   1. CONFIGURATION GÉNÉRALE, PALETTE & POLICES
+   ========================================================================== */
+html {
+    scroll-behavior: smooth !important;
+    /* Crée un espace de sécurité en haut pour que le menu fixe ne cache pas le titre de la catégorie */
+    scroll-padding-top: 130px; 
+}
+
+:root {
+    /* Mariage de couleurs : Or Satiné, Blanc Lumineux et Sombre Profond */
+    --primary-dark: #9c7487;     /* Fond de secours avec une pointe de bordeaux/rose sombre */
+    --accent-gold: #dfb76c;     /* Magnifique Or doré chaud pour attirer l'œil */
+    --accent-gold-hover: #f3d498;/* Or illuminé au survol */
+    --text-light: #ffffff;      /* Écritures principales : Blanc pur ultra-lisible */
+    --text-muted: #f2e6ec;      /* Écritures secondaires : Blanc rosé doux et harmonieux */
+    --glass-border: rgba(255, 255, 255, 0.2); /* Bordures fines et claires */
+    --shadow-subtle: 0 12px 40px rgba(0, 0, 0, 0.2);
+    --transition-smooth: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Rubik', sans-serif;
+    color: var(--text-light); /* Écritures par défaut */
+    background-color: var(--primary-dark);
+    overflow-x: hidden;
+}
+
+/* ==========================================================================
+   INTERACTION ET EFFETS COMPLÉMENTAIRES
+   ========================================================================== */
+.filter-nav {
+    display: flex;
+    gap: 10px;
+    padding: 15px;
+    overflow-x: auto;
+    white-space: nowrap;
+    background: rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid var(--glass-border);
+    position: sticky;
+    top: 70px; /* Se colle juste en dessous du menu principal */
+    z-index: 99;
+    backdrop-filter: blur(10px);
+}
+
+.filter-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-radius: 20px;
+    border: 1px solid transparent;
+    transition: var(--transition-smooth);
+}
+
+.filter-btn:hover, .filter-btn.active {
+    background: var(--accent-gold);
+    color: var(--primary-dark);
+    font-weight: 600;
+}
+
+.category-section {
+    padding-top: 20px;
+    margin-bottom: 40px;
+}
+
+.category-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--accent-gold);
+    margin-bottom: 20px;
+    border-left: 4px solid var(--accent-gold);
+    padding-left: 15px;
+}
+
+.forgot-pass-container { display: flex; align-items: center; gap: 6px; color: var(--text-muted); cursor: pointer; }
+.forgot-pass { color: var(--accent-gold); text-decoration: none; }
+
+/* ==========================================================================
+   9. PIED DE PAGE MODERNE & RESPONSIVE
+   ========================================================================== */
+.marble-footer {
+    margin-top: 60px;
+    margin-bottom: 20px;
+    padding: 40px 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    text-align: center;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.footer-logo {
+    height: 45px;
+    width: auto;
+    opacity: 0.9;
+}
+
+.marble-footer p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* Version Mobiles */
+@media (max-width: 768px) {
+    .hero-panel { flex-direction: column; }
+    .photo-grid { flex-direction: column; }
+    nav { flex-direction: column; }
+}
+/* ==========================================================================
+   2. ARRIÈRE-PLAN VIDÉO EN ROSE (EFFET TRANSPARENT FILTRÉ)
+   ========================================================================== */
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -2;
+    overflow: hidden;
+}
+
+#bg-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.9) contrast(1.1); /* Ajuste le contraste de la vidéo pour booster le rose */
+}
+
+/* Le calque magique qui transforme la vidéo en rose */
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Dégradé de roses semi-transparents (ajustez les opacités 0.45 pour plus/moins d'intensité) */
+    background: linear-gradient(135deg, rgba(244, 143, 177, 0.45), rgba(255, 182, 193, 0.45)) !important;
+    /* Fusionne parfaitement la couleur rose avec les tons clairs et sombres de la vidéo */
+    mix-blend-mode: overlay !important; 
+    z-index: -1;
+}
+
+/* Structure en couches suspendues */
+.page-container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1350px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+
+/* Panneaux en transparence absolue (Effet Écran de Verre Céleste) */
+.glass-panel {
+    background: transparent !important; 
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1.5px solid var(--glass-border);
+    box-shadow: var(--shadow-subtle);
+    border-radius: 12px;
+}
+
+/* ==========================================================================
+   3. NAVBAR / HEADER & NAVIGATION LUXE
+   ========================================================================== */
+.header-panel {
+    padding: 15px 30px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 55px;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+}
+
+.brand-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-light); /* Écriture Blanche */
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.logo {
+    height: 48px;
+    width: auto;
+    transition: var(--transition-smooth);
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-muted); /* Écriture blanc-rosé doux */
+    font-weight: 500;
+    font-size: 0.95rem;
+    position: relative;
+    padding: 6px 0;
+    transition: var(--transition-smooth);
+}
+
+/* Animation de soulignement couleur Or */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent-gold);
+    transition: var(--transition-smooth);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+.nav-links a.active, 
+.nav-links a:hover {
+    color: var(--accent-gold) !important; /* Écriture s'illumine en Or */
+}
+
+#authStatus {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* Bouton Navigation Or */
+.btn-nav {
+    background-color: transparent;
+    color: var(--accent-gold) !important;
+    border: 1.5px solid var(--accent-gold);
+    padding: 8px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: 'Rubik', sans-serif;
+    transition: var(--transition-smooth);
+}
+
+.btn-nav:hover {
+    background-color: var(--accent-gold);
+    color: var(--primary-dark) !important; /* L'écriture vire au sombre pour le contraste au survol */
+    box-shadow: 0 0 15px rgba(223, 183, 108, 0.4);
+}
+
+/* ==========================================================================
+   4. TITRES & MODULES FILTRES / PANIER ATTIRANTS
+   ========================================================================== */
+.products-title-section {
+    text-align: center;
+    padding: 30px 0 10px 0;
+}
+
+.products-title-section h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--text-light);
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.products-title-section p {
+    font-size: 1.1rem;
+    color: var(--accent-gold); /* Sous-titre captivant en Or */
+    font-weight: 400;
+}
+
+/* Barre de Filtres Transparente Raffinée */
+.filter-nav {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.filter-nav a, .filter-btn {
+    background: transparent !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: var(--text-light) !important; /* Écriture blanche claire */
+    padding: 10px 24px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-family: 'Rubik', sans-serif;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: var(--transition-smooth);
+}
+
+.filter-nav a:hover, .filter-btn:hover {
+    border-color: var(--accent-gold) !important;
+    color: var(--accent-gold) !important;
+}
+
+.filter-nav a.active, .filter-btn.active {
+    background: var(--accent-gold) !important;
+    color: var(--primary-dark) !important; /* Écriture contrastée sombre sur fond Or */
+    border-color: var(--accent-gold) !important;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(223, 183, 108, 0.3);
+}
+
+/* Résumé du Panier épuré */
+.cart-summary-box {
+    background: transparent !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    padding: 15px 25px;
+    margin-bottom: 35px;
+    border-radius: 8px;
+    text-align: center;
+    display: inline-block;
+}
+
+.cart-summary-box p {
+    color: var(--text-light) !important;
+    font-size: 1rem;
+}
+
+.cart-summary-box strong {
+    color: var(--accent-gold) !important; /* Montant mis en valeur en Or */
+    font-weight: 700;
+}
+
+/* ==========================================================================
+   5. SECTIONS DE CATÉGORIES & GRILLE DE PRODUITS MINIATURES
+   ========================================================================== */
+.category-section {
+    margin-bottom: 45px;
+}
+
+.category-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.7rem;
+    font-weight: 500;
+    color: var(--text-light);
+    margin-bottom: 25px;
+    border-bottom: 1.5px solid rgba(255, 255, 255, 0.15);
+    padding-bottom: 8px;
+}
+
+/* Grille multi-colonnes optimisée */
+.products-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)) !important;
+    gap: 20px !important;
+    padding: 10px 0;
+}
+
+/* Cartes Produits Transparentes Haut de Gamme */
+.product-card {
+    background: transparent !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    padding: 12px !important;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition-smooth);
+}
+
+.product-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--accent-gold) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.product-img-box {
+    width: 100%;
+    height: 220px !important;
+    overflow: hidden;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.product-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-img-box img {
+    transform: scale(1.06);
+}
+
+.product-details {
+    padding: 12px 4px 4px 4px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.product-details .category {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent-gold) !important; /* Catégorie accrocheuse en Or */
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.product-details h3 {
+    font-size: 0.95rem !important;
+    font-weight: 500;
+    color: var(--text-light) !important; /* Nom de produit blanc pur très net */
+    line-height: 1.4;
+    margin: 4px 0 12px 0 !important;
+    height: 2.6rem;
+    overflow: hidden;
+}
+
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
+
+.price-row .price {
+    font-size: 1.1rem !important;
+    font-weight: 700;
+    color: var(--text-light) !important;
+}
+
+/* Bouton d'Achat Lumineux */
+.buy-btn {
+    text-decoration: none;
+    background: transparent;
+    border: 1.5px solid var(--accent-gold);
+    color: var(--accent-gold); /* Texte initial Or */
+    font-size: 0.85rem !important;
+    padding: 6px 14px !important;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.buy-btn:hover {
+    background: var(--accent-gold);
+    color: var(--primary-dark) !important; /* Texte bascule au sombre au survol pour impact maximal */
+    font-weight: 600;
+}
+
+/* ==========================================================================
+   6. SECTION HERO DEUX BLOCS (ACCUEIL)
+   ========================================================================== */
+.hero-panel {
+    display: flex;
+    overflow: hidden;
+    min-height: 320px;
+}
+
+.hero-split {
+    flex: 1;
+}
+
+.left-side {
+    border-right: 1.5px solid var(--glass-border);
+}
+
+.hero-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    max-height: 350px;
+    object-fit: cover;
+}
+
+.right-side {
+    background-color: transparent !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.hero-content h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: var(--text-light);
+    margin-top: 10px;
+}
+
+.brand-badge {
+    display: inline-block;
+    background: rgba(223, 183, 108, 0.15);
+    color: var(--accent-gold);
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.hero-content p {
+    margin: 15px 0 25px 0;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.cta-button {
+    text-decoration: none;
+    background: var(--accent-gold);
+    color: var(--primary-dark);
+    font-weight: 600;
+    padding: 10px 28px;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    transition: var(--transition-smooth);
+}
+
+.cta-button:hover {
+    background: var(--accent-gold-hover);
+    box-shadow: 0 4px 15px rgba(223, 183, 108, 0.4);
+}
+
+/* ==========================================================================
+   7. AUTRES SECTIONS (FEATURES, GALERIE, CONTACT)
+   ========================================================================== */
+.features-panel {
+    padding: 20px;
+}
+
+.features-grid {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.fe-box {
+    text-align: center;
+    padding: 10px;
+}
+
+.icon-wrapper img {
+    height: 150px;
+}
+
+.fe-box h6 {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* Galerie Photos */
+#gallery h2 {
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+    color: var(--text-light);
+}
+
+.photo-grid {
+    display: flex;
+    gap: 15px;
+    justify-content: space-between;
+}
+
+.grid-item {
+    flex: 1;
+    aspect-ratio: 1 / 1;
+    border: 2px solid var(--accent-gold);
+    padding: 10px;
+    transition: var(--transition-smooth);
+}
+
+.grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.logo-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+}
+
+.gallery-center-logo {
+    object-fit: contain !important;
+    max-width: 80% !important;
+    max-height: 80% !important;
+    opacity: 0.85;
+}
+
+.grid-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(223, 183, 108, 0.2);
+}
+
+/* Contacts */
+.contact-panel {
+    padding: 30px;
+}
+
+.contact-panel h2 {
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+    color: var(--text-light);
+}
+
+.contact-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.contact-info p {
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+.contact-info a {
+    color: var(--accent-gold);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.map-link {
+    display: inline-block;
+    padding: 8px 20px;
+    border: 1px solid var(--accent-gold);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--accent-gold);
+    text-decoration: none;
+    font-size: 0.85rem;
+    border-radius: 4px;
+    transition: var(--transition-smooth);
+}
+
+.map-link:hover {
+    background: var(--accent-gold);
+    color: var(--primary-dark);
+}
+
+/* ==========================================================================
+   8. FORMULAIRE DE COMMANDE & CHIP AUTHENTIFICATION
+   ========================================================================== */
+.order-main, .auth-main {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.order-section, .auth-section {
+    width: 100%;
+    max-width: 700px;
+    padding: 40px;
+    border: 1.5px solid var(--accent-gold);
+}
+
+.auth-section { max-width: 500px; }
+
+.order-section h2, .auth-tabs {
+    font-family: 'Playfair Display', serif;
+    color: var(--text-light);
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+}
+
+.form-subtitle, .auth-subtitle {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+}
+
+.order-form, .auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group-row { display: flex; gap: 20px; }
+.form-group-row .form-group { flex: 1; }
+.form-group { display: flex; flex-direction: column; gap: 8px; }
+
+.form-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent-gold); /* Libellés éclatants en Or */
+}
+
+.form-group input, .form-group select, .form-group textarea {
+    width: 100%;
+    padding: 11px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(0, 0, 0, 0.25); /* Fond transparent sombre texturé */
+    border-radius: 4px;
+    font-family: 'Rubik', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    outline: none;
+    transition: var(--transition-smooth);
+}
+
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--accent-gold);
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 10px rgba(223, 183, 108, 0.2);
+}
+
+/* Boutons de Soumission */
+.submit-order-btn, .auth-btn {
+    background: var(--accent-gold);
+    color: var(--primary-dark);
+    border: none;
+    padding: 14px;
+    font-size: 1rem;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: var(--transition-smooth);
+}
+
+.submit-order-btn:hover, .auth-btn:hover {
+    background: var(--accent-gold-hover);
+    box-shadow: 0 4px 15px rgba(223, 183, 108, 0.4);
+}
+
+/* Onglets d'authentification */
+.auth-tabs { display: flex; border-bottom: 2px solid rgba(255,255,255,0.1); margin-bottom: 25px; }
+.tab-btn { flex: 1; background: none; border: none; padding: 12px; color: var(--text-muted); font-weight: 600; cursor: pointer; transition: var(--transition-smooth); position: relative;}
+.tab-btn:hover, .tab-btn.active { color: var(--accent-gold); }
+.tab-btn.active::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 2px; background-color: var(--accent-gold); }
+.auth-form { display: none; }
+.auth-form.active { display: flex; }
+.form-options { display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; }
+.remember-me { display: flex; align-items: center; gap: 6px; color: var(--text-muted); cursor: pointer; }
+.forgot-pass { color: var(--accent-gold); text-decoration: none; }
+
+/* ==========================================================================
+   9. PIED DE PAGE MODERNE & RESPONSIVE
+   ========================================================================== */
+.marble-footer {
+    margin-top: 60px;
+    margin-bottom: 20px;
+    padding: 40px 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    text-align: center;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.footer-logo {
+    height: 45px;
+    width: auto;
+    opacity: 0.9;
+}
+
+.marble-footer p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* Version Mobiles */
+@media (max-width: 768px) {
+    .hero-panel { flex-direction: column; }
+    .photo-grid { flex-direction: column; }
+    nav { flex-direction: column; gap: 15px; }
+    .nav-links { flex-wrap: wrap; justify-content: center; gap: 15px; }
+    .products-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)) !important; gap: 12px !important; }
+    .product-img-box { height: 180px !important; }
+    .form-group-row { flex-direction: column; gap: 20px; }
+    .order-section, .auth-section { padding: 20px; }
+    .form-options { flex-direction: column; align-items: flex-start; gap: 12px; }
+}
