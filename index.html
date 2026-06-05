@@ -1,0 +1,217 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boutique Mina - Accueil</title>
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Rubik:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="background">
+ 
+       
+    </div>
+
+    <div class="page-container">
+        
+        <header class="glass-panel header-panel">
+            <nav>
+                <div class="logo-container">
+                    <a href="index.html" class="logo-link"> 
+                        <img src="content/image/logo.png" class="logo" alt="Logo Boutique Mina"> 
+                        <span class="brand-text">Boutique Mina</span>
+                    </a>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html" class="active">Accueil</a>
+                    <a href="content/produits.html">Produits</a>
+                    <a href="content/commande.html">Commander</a>
+                    <a href="content/login.html" class="btn-nav" id="menuAuthBtn">Connexion</a>
+                </div>
+            </nav>
+        </header>
+
+  <main>
+    <!-- Styles locaux intégrés pour rendre l'ensemble du contenu plus compact -->
+    <style>
+        /* Réduction globale des espacements du main */
+        main {
+            max-width: 1100px; /* Aligne et centre le contenu dans un espace plus élégant */
+            margin: 0 auto;
+            padding: 15px !important;
+        }
+
+        /* 1. Section Hero plus petite */
+        .hero-panel {
+            padding: 20px !important; /* Moins d'espace interne */
+            margin-bottom: 20px !important;
+        }
+        .hero-image-wrapper {
+            max-height: 350px; /* Réduit la hauteur de la grande image */
+        }
+        .hero-content h1 {
+            color: #1a1a1a !important;
+            font-size: 2rem !important; /* Titre plus discret (ex: descendu de 3rem) */
+            margin-bottom: 10px !important;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.6);
+        }
+        .hero-content p {
+            color: #2c2c2c !important;
+            font-size: 0.95rem !important; /* Texte légèrement plus dense */
+            line-height: 1.5 !important;
+        }
+        .cta-button {
+            padding: 8px 20px !important; /* Bouton plus petit */
+            font-size: 0.9rem !important;
+            margin-top: 15px !important;
+        }
+
+        /* 2. Section Features compacte */
+        .features-panel {
+            padding: 15px !important;
+            margin-bottom: 20px !important;
+        }
+        .features-grid {
+            gap: 15px !important; /* Rapproche les blocs */
+        }
+        .fe-box {
+            padding: 10px !important;
+        }
+        .fe-box img {
+            width: 45px !important; /* Icones/Logos légèrement rétrécis */
+            height: 45px !important;
+        }
+        .fe-box h3 {
+            color: #111111 !important;
+            font-size: 0.95rem !important; /* Écritures des atouts plus petites */
+            margin-top: 8px !important;
+        }
+
+        /* 3. Section Vitrine Média (Carte & Vidéo) plus basse */
+        .media-showcase {
+            display: flex;
+            gap: 15px;
+            margin: 0 0 20px 0 !important;
+            flex-wrap: wrap;
+        }
+        .media-box {
+            flex: 1;
+            min-width: 250px;
+            height: 250px; /* Hauteur descendue de 350px à 250px pour rester discret */
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        .media-box img, .media-box video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 4. Section Contact plus resserrée */
+        .contact-panel {
+            padding: 20px !important;
+        }
+        .footer-logo {
+            max-width: 60px !important; /* Logo plus petit en bas */
+            margin-bottom: 10px !important;
+        }
+        .contact-panel h2 {
+            color: #1a1a1a !important;
+            font-size: 1.4rem !important;
+            margin-bottom: 15px !important;
+        }
+        .contact-container {
+            gap: 15px !important;
+        }
+        .contact-info p, .contact-info a {
+            color: #333333 !important;
+            font-size: 0.95rem !important;
+            margin-bottom: 6px !important;
+        }
+    </style>
+            
+    <!-- Section Héro -->
+    <section id="hero" class="glass-panel hero-panel">
+        <div class="hero-split left-side">
+            <div class="hero-image-wrapper">
+                <img src="content/image/fashion.jpg" alt="Collection Tendance">
+            </div>
+        </div>
+        <div class="hero-split right-side">
+            <div class="hero-content">
+                <div class="brand-badge">Mina ✨</div>
+                <h1>Trouve ton bonheur...</h1>
+                <p>Bienvenue dans votre nouvel espace d'inspiration. Chez Mina, nous croyons que le style est la plus belle manière d'exprimer qui vous êtes. C'est pourquoi nous sommes ici pour vous guider, vous inspirer et vous proposer une sélection unique, pensée pour sublimer votre quotidien. Que vous cherchiez la pièce maîtresse de votre dressing ou le détail qui fait la différence, vous êtes au bon endroit. Installez-vous, explorez et trouvez enfin le style qui vous ressemble. 🛍️</p>
+                <a href="content/produits.html" class="cta-button">Je craque !</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Atouts (Features) -->
+    <section id="features" class="glass-panel features-panel">
+        <div class="features-grid">
+            <div class="fe-box">
+                <div class="icon-wrapper">
+                    <img src="content/image/logo.png" alt="Style">
+                    <h3>là où le style commence</h3>
+                </div>
+            </div>
+            <div class="fe-box">
+                <div class="icon-wrapper">
+                    <img src="content/image/logoo.jpg" alt="Vestiaire">
+                    <h3>Votre vestiaire idéal commence ici</h3>
+                </div>
+            </div>
+            <div class="fe-box">
+                <div class="icon-wrapper">
+                    <img src="content/image/mina.png" alt="Inspiration">
+                    <h3>Entrez. Inspirez-vous. Créez votre style.</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Vitrine Média (Carte & Vidéo plus petites) -->
+    <section class="media-showcase">
+        <div class="media-box glass-panel">
+            <img src="content/image/map.png" alt="Plan Boutique Mina">
+        </div>
+        <div class="media-box glass-panel">
+            <video src="content/video/video1boutique.mp4" autoplay muted loop playsinline></video>
+        </div>
+    </section>
+
+    <!-- Section Contact -->
+    <section id="contact" class="glass-panel contact-panel">
+        <img src="content/image/logo.png" class="footer-logo" alt="Boutique Mina">
+        <h2>Une question ? Contacte-nous</h2>
+        <div class="contact-container">
+            <address class="contact-info">
+                <p><strong>Mail :</strong> <a href="mailto:contact2026@boutiquemina.com">contact2026@boutiquemina.com</a></p>
+                <p><strong>Où nous trouver :</strong> Tigzirt, Tizi-Ouzou</p>
+                <p><strong>Tel :</strong> 0600000001 / 0732102312</p>
+            </address>
+            <div class="contact-map">
+                <a href="https://maps.google.com" target="_blank" class="map-link">📍 Cliquer ici pour voir le plan</a>
+            </div>
+        </div>
+    </section>
+</main>
+        <footer class="marble-footer">
+            <div class="footer-content">
+                <img src="content/image/logo.png" class="footer-logo" alt="Boutique Mina">
+                <p>© 2026 Boutique Mina - Tous droits réservés</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <script src="javascript/main.js"></script>
+</body>
+</html>
